@@ -35,6 +35,11 @@ class Player(GameSprite):
 class Ball(GameSprite):
     pass
 
+platform_1 = Player('image2.png', 0, 0, 30, 100, 10)
+platform_2 = Player('image3.png', 670, 0, 30, 100, 10)
+
+
+
 while game:
     for e in event.get():
         if e.type == QUIT:
