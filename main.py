@@ -15,7 +15,12 @@ class GameSprite(sprite.Sprite):
         scene.blit(self.image, (self.rect.x, self.rect.y)) 
 
 class Player(GameSprite):
-    pass
+    def update(self):
+        keys = key.get_pressed()
+        if keys[K_UP] and self.rect.y > 0:
+            self.rect.y -= self.speed
+        if keys[K_DOWN] and self.rect.y < win.height - self.height:
+            self.rect.y += self.speed
 
 class Ball(GameSprite):
     pass
