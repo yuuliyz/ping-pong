@@ -53,7 +53,7 @@ class Ball(GameSprite):
             self.rect.y = start_y
 
     def move(self):
-        self.speed * -1
+        self.speed *= -1
 
     
 
