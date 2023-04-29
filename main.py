@@ -43,7 +43,7 @@ class Ball(GameSprite):
             score2 += 1
             
         if self.rect.x > win_width - self.width:
-                score1 += 1
+            score1 += 1
 
     def move(self):
         self.speed * -1
@@ -73,6 +73,13 @@ while game:
 
     if sprite.collide_rect(platform_1, ball) or sprite.collide_rect(platform_2, ball):
         ball.move()
+
+    if score1 > 5:
+        update = False
+        window.blit(font.Font(None, 60).render('Игрок 1 победил', True, (255, 255, 255)))
+    if score2 > 5:
+        update = False
+        window.blit(font.Font(None, 60).render('Игрок 2 победил', True, (255, 255, 255)))
     
         
         
