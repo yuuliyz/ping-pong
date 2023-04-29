@@ -70,16 +70,18 @@ while game:
         platform_2.reset()
         ball.update()
         ball.reset()
+        window.blit(font.Font(None, 40).render('Oчки:'+str(lost), True, (255, 255, 255)), (10, 10))
+        window.blit(font.Font(None, 40).render('Очки:'+str(lost), True, (255, 255, 255)), (650, 10))
 
     if sprite.collide_rect(platform_1, ball) or sprite.collide_rect(platform_2, ball):
         ball.move()
 
     if score1 > 5:
         update = False
-        window.blit(font.Font(None, 60).render('Игрок 1 победил', True, (255, 255, 255)))
+        window.blit(font.Font(None, 60).render('Игрок 1 победил', True, (255, 255, 255)), (win_width//2-150, win_height//2))
     if score2 > 5:
         update = False
-        window.blit(font.Font(None, 60).render('Игрок 2 победил', True, (255, 255, 255)))
+        window.blit(font.Font(None, 60).render('Игрок 2 победил', True, (255, 255, 255)), (win_width//2-150, win_height//2))
     
         
         
