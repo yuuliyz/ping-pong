@@ -1,11 +1,12 @@
 from pygame import *
 init()
+font.init()
 
 win_width = 700
 win_height = 500
 window = display.set_mode((win_width, win_height))
 display.set_caption('Пинг-понг')
-background = transform.scale(image.load('image.png'), (win_width, win_height))
+background = transform.scale(image.load('image.jpg'), (win_width, win_height))
 
 FPS = 60
 game = True
@@ -13,9 +14,6 @@ update = True
 
 score1 = 0
 score2 = 0
-
-start_x = 350
-start_y = 250
 
 class GameSprite(sprite.Sprite):
     def init(self, sprite_image, sprite_x, sprite_y, sprite_width, sprite_height, sprite_speed):
@@ -28,7 +26,7 @@ class GameSprite(sprite.Sprite):
         self.rect.x = sprite_x
         self.rect.y = sprite_y
     def reset(self):
-        scene.blit(self.image, (self.rect.x, self.rect.y)) 
+        window.blit(self.image, (self.rect.x, self.rect.y)) 
 
 class Player(GameSprite):
     def update(self):
@@ -44,22 +42,18 @@ class Ball(GameSprite):
         self.rect.y += self.speed
         if self.rect.x < 0:
             score2 += 1
-            self.rect.x = start_x
-            self.rect.y = start_y
             
         if self.rect.x > win_width - self.width:
             score1 += 1
-            self.rect.x = start_x
-            self.rect.y = start_y
 
     def move(self):
-        self.speed *= -1
+        self.speed * -1
 
     
 
 platform_1 = Player('image2.png', 0, 0, 30, 100, 10)
-platform_2 = Player('image3.png', 670, 0, 30, 100, 10)
-ball = Ball('image4.png', start_x, start_y, 50, 50, 3)
+platform_2 = Player('image2.png', 670, 0, 30, 100, 10)
+ball = Ball('image4.png', 350, 250, 50, 50, 3)
 
 
 
@@ -77,22 +71,20 @@ while game:
         platform_2.reset()
         ball.update()
         ball.reset()
-        window.blit(font.Font(None, 40).render('Oчки:'+str(lost), True, (255, 255, 255)), (10, 10))
-        window.blit(font.Font(None, 40).render('Очки:'+str(lost), True, (255, 255, 255)), (650, 10))
 
     if sprite.collide_rect(platform_1, ball) or sprite.collide_rect(platform_2, ball):
         ball.move()
 
     if score1 > 5:
         update = False
-        window.blit(font.Font(None, 60).render('Игрок 1 победил', True, (255, 255, 255)), (win_width//2-150, win_height//2))
+        window.blit(font.SysFont("Arial", 60).render('Игрок 1 победил', True, (255, 255, 255)))
     if score2 > 5:
         update = False
-        window.blit(font.Font(None, 60).render('Игрок 2 победил', True, (255, 255, 255)), (win_width//2-150, win_height//2))
+        window.blit(font.SysFont('Arial', 60).render('Игрок 2 победил', True, (255, 255, 255)))
     
         
         
         
-display.update()
-clock.tick(FPS)
+    display.update()
+    clock.tick(FPS)
         
