@@ -87,6 +87,9 @@ while game:
         ball.update()
         ball.reset()
 
+        window.blit(font.SysFont("Arial", 20).render('очки игрока 1:' + str(score1), True, (255, 255, 255)), (10, 10))
+        window.blit(font.SysFont('Arial', 20).render('очки игрока 2:' + str(score2), True, (255, 255, 255)), (570, 10))
+
     if sprite.collide_rect(platform_1, ball) or sprite.collide_rect(platform_2, ball):
         ball.move()
     if ball.rect.x < 0:
@@ -94,15 +97,17 @@ while game:
         ball.rect.x = start_x
         ball.rect.y = start_y
 
-    if score1 > 5:
+    if ball.rect.x > win_width - ball.width:
+        score1 += 1
+        ball.rect.x = start_x
+        ball.rect.y = start_y
+
+    if score1 == 5:
         update = False
-        window.blit(font.SysFont("Arial", 60).render('Игрок 1 победил', True, (255, 255, 255)))
-    if score2 > 5:
+        window.blit(font.SysFont("Arial", 60).render('Игрок 1 победил', True, (255, 255, 255)), (150, 220))
+    if score2 == 5:
         update = False
-        window.blit(font.SysFont('Arial', 60).render('Игрок 2 победил', True, (255, 255, 255)))
-    
-        
-        
-        
+        window.blit(font.SysFont('Arial', 60).render('Игрок 2 победил', True, (255, 255, 255)), (150, 220))
+
     display.update()
     clock.tick(FPS)
