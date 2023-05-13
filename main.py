@@ -97,10 +97,12 @@ while game:
         ball.rect.x = start_x
         ball.rect.y = start_y
 
+
     if ball.rect.x > win_width - ball.width:
         score1 += 1
         ball.rect.x = start_x
         ball.rect.y = start_y
+
 
     if score1 == 5:
         update = False
@@ -108,6 +110,9 @@ while game:
     if score2 == 5:
         update = False
         window.blit(font.SysFont('Arial', 60).render('Игрок 2 победил', True, (255, 255, 255)), (150, 220))
-
+    
+        
+        
+        
     display.update()
     clock.tick(FPS)
